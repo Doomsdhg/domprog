@@ -1,4 +1,5 @@
 function findUnique(array: number[]): number[] {
-    const set = new Set(array);
-    return [...new Set(array)];
+    return array.filter((number: number) => {
+        return array.lastIndexOf(number) === array.indexOf(number);
+    })
 }
