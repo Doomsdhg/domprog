@@ -1,0 +1,41 @@
+<div class="manage-book-dialog-container">
+    <div class="dialog-content">
+        <h1 class="dialog-content__title">Add a book</h1>
+        <mat-divider></mat-divider>
+        <form class="dialog-content__formgroup">
+            <mat-form-field appearance="fill">
+                <mat-label>Author</mat-label>
+                <input formControlName="todoText"
+                matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Year</mat-label>
+                <input formControlName="todoText"
+                matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Book name</mat-label>
+                <input formControlName="todoText"
+                matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Pages amount</mat-label>
+                <input formControlName="todoText"
+                matInput>
+            </mat-form-field>
+        </form>
+        <div class="dialog-content__buttonsgroup">
+            <button mat-stroked-button 
+            class="cancel-button">
+            Cancel
+            </button>
+            <mat-divider [vertical]="true" class="divider"></mat-divider>
+            <button mat-flat-button 
+            type="submit"
+            color="primary"
+            class="ok-button">
+            Add
+            </button>
+        </div>
+    </div>
+</div>

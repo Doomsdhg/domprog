@@ -1,0 +1,33 @@
+.book-card-container {
+    margin-top: 1rem;
+    .content {
+        display: inline-flex;
+        flex-direction: row;
+        width: 50%;
+        .content__author {
+            flex: 1;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .content__book {
+            flex: 1;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .mat-card-actions {
+        display: inline-flex;
+        align-self: flex-end;
+        float: right;
+        .edit-button {
+            background-color: green;
+        }
+        .delete-button {
+            background-color: red;
+        }
+    }
+}

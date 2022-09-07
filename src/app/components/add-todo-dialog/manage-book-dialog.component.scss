@@ -1,0 +1,26 @@
+.manage-book-dialog-container {
+    width: 20rem;
+    .dialog-content {
+        .dialog-content__formgroup {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            .display-none {
+                display: none;
+            }
+        }
+        .dialog-content__buttonsgroup {
+            display: flex;
+            .cancel-button {
+                flex: 4;
+            }
+            .divider {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+            }
+            .ok-button {
+                flex: 4;
+            }
+        }
+    }
+}
