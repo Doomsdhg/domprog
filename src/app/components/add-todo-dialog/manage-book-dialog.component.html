@@ -2,26 +2,36 @@
     <div class="dialog-content">
         <h1 class="dialog-content__title">Add a book</h1>
         <mat-divider></mat-divider>
-        <form class="dialog-content__formgroup">
+        <form class="dialog-content__formgroup"
+        [formGroup]="formGroup">
             <mat-form-field appearance="fill">
                 <mat-label>Author</mat-label>
-                <input formControlName="todoText"
+                <input formControlName="author"
                 matInput>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>Year</mat-label>
-                <input formControlName="todoText"
-                matInput>
-            </mat-form-field>
+                <input matInput 
+                disabled
+                [matDatepicker]="dp" 
+                placeholder="{{yearFormValue}}">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp
+                                disabled="false"
+                                startView="multi-year"
+                                (yearSelected)="handleYearChoice($event, dp)"
+                                panelClass="example-month-picker">
+                </mat-datepicker>
+              </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Book name</mat-label>
-                <input formControlName="todoText"
+                <input formControlName="bookName"
                 matInput>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Pages amount</mat-label>
-                <input formControlName="todoText"
-                matInput>
+                <input formControlName="pagesAmount"
+                matInput
+                type="number">
             </mat-form-field>
         </form>
         <div class="dialog-content__buttonsgroup">
@@ -33,7 +43,8 @@
             <button mat-flat-button 
             type="submit"
             color="primary"
-            class="ok-button">
+            class="ok-button"
+            (click)="addBook()">
             Add
             </button>
         </div>
