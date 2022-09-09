@@ -14,6 +14,11 @@ import { MatInputModule } from '@angular/material/input';
 import { BooksListComponent } from './components/books-list/books-list.component';
 import { BookCardComponent } from './components/book-card/book-card.component';
 import { MatCardModule } from '@angular/material/card';
+import { StoreModule } from '@ngrx/store';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { booksReducers } from './components/book-card/store/books-reducers';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,13 @@ import { MatCardModule } from '@angular/material/card';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule, 
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot({books: booksReducers}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
