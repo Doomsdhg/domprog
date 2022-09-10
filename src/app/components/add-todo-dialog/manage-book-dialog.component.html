@@ -36,16 +36,26 @@
         </form>
         <div class="dialog-content__buttonsgroup">
             <button mat-stroked-button 
-            class="cancel-button">
+            class="cancel-button"
+            (click)="closeDialog()">
             Cancel
             </button>
             <mat-divider [vertical]="true" class="divider"></mat-divider>
             <button mat-flat-button 
+            *ngIf="!currentlyEditing"
             type="submit"
             color="primary"
             class="ok-button"
             (click)="addBook()">
             Add
+            </button>
+            <button mat-flat-button 
+            *ngIf="currentlyEditing"
+            type="submit"
+            color="primary"
+            class="ok-button"
+            (click)="saveEditingChanges()">
+            Save
             </button>
         </div>
     </div>
