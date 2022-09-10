@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { BooksManagerService } from 'src/app/services/books-manager.service';
 import { Book } from './book.model';
 
 @Component({
@@ -11,6 +12,16 @@ export class BookCardComponent {
   @Input()
   book!: Book;
 
-  constructor() { }
+  @Input()
+  index!: number;
 
+  constructor(private booksManagerService: BooksManagerService) {}
+
+  public editBook(): void {
+
+  }
+
+  public deleteBook(): void {
+    this.booksManagerService.deleteBook(this.index);
+  }
 }

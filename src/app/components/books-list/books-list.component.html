@@ -1,4 +1,5 @@
 <div class="books-list-container">
-    <dmprg-book-card *ngFor="let book of booksList;"
-    [book]="book"></dmprg-book-card>
+    <dmprg-book-card *ngFor="let book of booksList; index as index"
+    [book]="book"
+    [index]="index"></dmprg-book-card>
 </div>

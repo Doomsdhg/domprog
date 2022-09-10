@@ -11,11 +11,13 @@
     </div>
     <mat-card-actions align="end">
         <button mat-raised-button
-        class="edit-button">
+        class="edit-button"
+        (click)="editBook()">
             Edit
         </button>
         <button mat-raised-button
-        class="delete-button">
+        class="delete-button"
+        (click)="deleteBook()">
             Delete
         </button>
     </mat-card-actions>

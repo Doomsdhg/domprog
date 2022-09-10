@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
-import { addBook } from 'src/app/store/books/books-actions';
+import { addBook, deleteBook, DeleteBookActionProps } from 'src/app/store/books/books-actions';
 import { booksSelector } from 'src/app/store/books/books-selectors';
 import { BookDto } from '../components/book-card/book-dto.interface';
 import { Book } from '../components/book-card/book.model';
@@ -33,6 +33,15 @@ export class BooksManagerService {
     .subscribe((state: BooksState) => {
       this.booksDataSource.next(state.books);
     });
+  }
+
+  public deleteBook(index: number): void {
+    this.store.dispatch(deleteBook(new DeleteBookActionProps(index)));
+    this.store.select('books')
+    .subscribe((state: BooksState) => {
+      this.saveBooksToLocalStorage(state.books);
+      this.booksDataSource.next(state.books);
+    })
   }
 
   private saveBooksToLocalStorage(booksList: Book[]): void {
