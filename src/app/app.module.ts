@@ -17,7 +17,7 @@ import { MatCardModule } from '@angular/material/card';
 import { StoreModule } from '@ngrx/store';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { booksReducers } from './components/book-card/store/books-reducers';
+import { booksReducers } from 'src/app/store/books/books-reducers';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
