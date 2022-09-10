@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BooksManagerService } from 'src/app/services/books-manager.service';
 import { BookDto } from '../book-card/book-dto.interface';
+import { ManageBookDialogPassData } from './manage-book-dialog-pass-data.model';
 
 @Component({
   selector: 'dmprg-manage-book-dialog',
@@ -17,7 +18,8 @@ export class ManageBookDialogComponent implements OnInit {
 
   constructor(
     private booksManagerService: BooksManagerService,
-    private dialogRef: MatDialogRef<ManageBookDialogComponent>
+    private dialogRef: MatDialogRef<ManageBookDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data?: ManageBookDialogPassData
   ){}
 
   ngOnInit(): void {
@@ -28,13 +30,26 @@ export class ManageBookDialogComponent implements OnInit {
     return this.formGroup.get('year')?.value;
   }
 
+  public get currentlyEditing(): boolean {
+    return Boolean(this.data);
+  }
+
   public handleYearChoice(year: Date, picker: MatDatepicker<Date>): void{
     this.formGroup.get('year')?.setValue(year.getFullYear());
     picker.close();
   }
 
+  public closeDialog(): void {
+    this.dialogRef.close();
+  }
+
   public addBook(): void {
     this.booksManagerService.addBook(this.buildBookDto());
+    this.dialogRef.close();
+  }
+
+  public saveEditingChanges(): void {
+    this.booksManagerService.saveEditingChanges(this.buildBookDto(), this.data!.index);
     this.dialogRef.close();
   }
 
@@ -44,10 +59,10 @@ export class ManageBookDialogComponent implements OnInit {
 
   private buildForms(): void {
     this.formGroup = new FormGroup({
-      author: new FormControl<string>(''),
-      bookName: new FormControl<string>(''),
-      year: new FormControl<number>(new Date().getFullYear()),
-      pagesAmount: new FormControl<number>(0)
+      author: new FormControl<string>(this.data ? this.data.book.author : ''),
+      bookName: new FormControl<string>(this.data ? this.data.book.bookName : ''),
+      year: new FormControl<number>(this.data ? this.data.book.year : new Date().getFullYear()),
+      pagesAmount: new FormControl<number>(this.data ? this.data.book.pagesAmount : 0)
     })
   }
 }

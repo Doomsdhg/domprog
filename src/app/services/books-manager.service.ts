@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
-import { addBook, deleteBook, DeleteBookActionProps } from 'src/app/store/books/books-actions';
+import { addBook, deleteBook, DeleteBookActionProps, editBook, EditBookActionProps } from 'src/app/store/books/books-actions';
 import { booksSelector } from 'src/app/store/books/books-selectors';
 import { BookDto } from '../components/book-card/book-dto.interface';
 import { Book } from '../components/book-card/book.model';
@@ -15,7 +15,9 @@ export class BooksManagerService {
 
   public booksDataSource = new BehaviorSubject<Book[]>([]);
 
-  constructor(private store: Store<AppState>){
+  constructor(
+    private store: Store<AppState>
+  ){
     this.store.pipe(select(booksSelector))
   }
 
@@ -31,17 +33,19 @@ export class BooksManagerService {
   public getBooks(): void {
     this.store.select('books')
     .subscribe((state: BooksState) => {
+      this.saveBooksToLocalStorage(state.books);
       this.booksDataSource.next(state.books);
     });
   }
 
   public deleteBook(index: number): void {
     this.store.dispatch(deleteBook(new DeleteBookActionProps(index)));
-    this.store.select('books')
-    .subscribe((state: BooksState) => {
-      this.saveBooksToLocalStorage(state.books);
-      this.booksDataSource.next(state.books);
-    })
+    this.getBooks();
+  }
+
+  public saveEditingChanges(bookDto: BookDto, index: number): void {
+    this.store.dispatch(editBook(new EditBookActionProps(bookDto, index)));
+    this.getBooks();
   }
 
   private saveBooksToLocalStorage(booksList: Book[]): void {

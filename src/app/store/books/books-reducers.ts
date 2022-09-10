@@ -22,8 +22,16 @@ export const booksReducers = createReducer(
     on(
         BooksActions.deleteBook, 
         (state: BooksState, action: BooksActions.DeleteBookActionProps): BooksState => {
-            const newState = JSON.parse(JSON.stringify(state));
+            const newState: BooksState = JSON.parse(JSON.stringify(state));
             newState.books.splice(action.index, 1);
+            return newState;
+        }
+    ),
+    on(
+        BooksActions.editBook, 
+        (state: BooksState, action: BooksActions.EditBookActionProps): BooksState => {
+            const newState: BooksState = JSON.parse(JSON.stringify(state));
+            newState.books[action.index] = action.book;
             return newState;
         }
     ),
