@@ -1,5 +1,4 @@
 import { createAction, props } from "@ngrx/store";
-import { Book } from "../book.model";
-import { BooksState } from "./books-state.interface";
+import { Book } from "src/app/components/book-card/book.model";
 
 export const addBook = createAction('[Manage Book Dialog Component] Add Book', props<Book>());
