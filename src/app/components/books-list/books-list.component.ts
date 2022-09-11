@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit
+} from '@angular/core';
 import { BooksManagerService } from 'src/app/services/books-manager.service';
 import { Book } from '../book-card/book.model';
 
@@ -6,16 +11,15 @@ import { Book } from '../book-card/book.model';
   selector: 'dmprg-books-list',
   templateUrl: './books-list.component.html',
   styleUrls: ['./books-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BooksListComponent implements OnInit {
-
   public booksList: Book[] = [];
 
   constructor(
     private booksManagerService: BooksManagerService,
     private changeDetectorRef: ChangeDetectorRef
-    ){}
+  ) {}
 
   ngOnInit(): void {
     this.getBooks();
@@ -27,6 +31,6 @@ export class BooksListComponent implements OnInit {
     .subscribe((books: Book[]) => {
       this.booksList = books;
       this.changeDetectorRef.detectChanges();
-    })
+    });
   }
 }

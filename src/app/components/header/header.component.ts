@@ -6,13 +6,12 @@ import { ManageBookDialogComponent } from '../add-todo-dialog/manage-book-dialog
   selector: 'dmprg-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent{
+export class HeaderComponent {
+  constructor(private dialog: MatDialog) {}
 
-  constructor(private dialog: MatDialog){}
-
-  openDialog(): void{
+  openDialog(): void {
     this.dialog.open(ManageBookDialogComponent);
   }
 }
