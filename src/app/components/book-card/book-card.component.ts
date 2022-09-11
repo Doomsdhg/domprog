@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BooksManagerService } from 'src/app/services/books-manager.service';
+import { NotifyService } from 'src/app/services/notify.service';
+import { Constants } from 'src/app/services/notify.service.constants';
 import { ManageBookDialogPassData } from '../add-todo-dialog/manage-book-dialog-pass-data.model';
 import { ManageBookDialogComponent } from '../add-todo-dialog/manage-book-dialog.component';
 import { Book } from './book.model';
@@ -12,6 +14,8 @@ import { Book } from './book.model';
 })
 export class BookCardComponent {
 
+  readonly DELETED_SUCCESSFULLY_MESSAGE = 'Book deleted successfully';
+
   @Input()
   book!: Book;
 
@@ -20,6 +24,7 @@ export class BookCardComponent {
 
   constructor(
     private booksManagerService: BooksManagerService,
+    private notifyService: NotifyService,
     private dialog: MatDialog
     ) {}
 
@@ -34,5 +39,6 @@ export class BookCardComponent {
 
   public deleteBook(): void {
     this.booksManagerService.deleteBook(this.index);
+    this.notifyService.showMessage(this.DELETED_SUCCESSFULLY_MESSAGE, Constants.MESSAGE_TYPES.SUCCESS);
   }
 }
